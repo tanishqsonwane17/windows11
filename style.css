@@ -46,3 +46,10 @@ hr{
   position: relative; 
   transition: opacity 0.3s;
 }
+.folder-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.folder-grid::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 3px;
+}
