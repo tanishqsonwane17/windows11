@@ -8,7 +8,7 @@ const foldersContainer = document.querySelector(".folders");
 const deleteItems = document.querySelector(".deleteItems");
 const renamebtn = document.getElementById("renamebtn");
 const deleteFolder = document.getElementById("deleteFolder");
-const view = document.getElementById("view");
+const largeIcon = document.querySelector('#large-icon')
 const viewItems = document.querySelector(".view-options");
 const cutFolder = document.getElementById("cutFolder");
 const pasteFolder = document.getElementById("pasteFolder");
@@ -45,12 +45,12 @@ desktop.addEventListener("contextmenu", function (e) {
 });
 
 refreshBtn.addEventListener("click", () => location.reload());
-
+var folder
 folderOption.addEventListener("click", (e) => {
   e.stopPropagation();
-  const folder = document.createElement("div");
-  folder.className = "folder w-20 h-24 flex flex-col items-center justify-center text-4xl cursor-pointer";
-  folder.innerHTML = `📁<span class="text-xs mt-1 text-center">New Folder</span>`;
+folder = document.createElement("div");
+  folder.className = "folder w-20 h-20 flex flex-col items-center justify-center text-4xl cursor-pointer";
+  folder.innerHTML = `<span class = "">📁</span><span class="text-xs mt-1 text-center">New Folder</span>`;
 
   folder.addEventListener("contextmenu", function (e) {
     e.preventDefault();
@@ -69,8 +69,6 @@ folderOption.addEventListener("click", (e) => {
   foldersContainer.appendChild(folder);
   [menu, newItems].forEach(el => el.classList.add("hidden"));
 });
-
-
 deleteFolder.addEventListener('click', () => {
   if (SelectedFolder) {
     SelectedFolder.remove();
@@ -250,3 +248,11 @@ changeWallpaperBtn.addEventListener("click", () => {
 desktop.style.backgroundImage = wallpapers[0];
 desktop.style.backgroundSize = "cover";
 desktop.style.backgroundPosition = "center";
+
+largeIcon.addEventListener('click',function(){
+const allFolders = document.querySelectorAll(".folder");
+allFolders.forEach(folder => {
+  folder.className = "folder w-28 h-32 flex flex-col items-center justify-center text-4xl cursor-pointer";
+  folder.innerHTML = `<span class="text-6xl">📁</span><span class="text-xs mt-1 text-center">New Folder</span>`;
+});
+})
