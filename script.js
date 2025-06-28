@@ -18,7 +18,7 @@ const fileExplorer = document.getElementById("file-explorer");
 const pathBar = document.getElementById("pathBar");
 const closeExplorer = document.getElementById("closeExplorer");
 const smallIcon = document.querySelector('#small-icon')
-
+const showIcon = document.querySelector('#show-icon')
 let pastePosition = { x: 0, y: 0 };
 let SelectedFolder = null;
 let cutElement = null;
@@ -261,6 +261,13 @@ smallIcon.addEventListener('click',function(){
 const allFolders = document.querySelectorAll(".folder");
 allFolders.forEach(folder => {
   folder.className = "folder w-16 h-16 flex flex-col items-center justify-center text-4xl cursor-pointer";
+  folder.innerHTML = `<span class="text-xl">📁</span><span class="text-xs mt-1 text-center">New Folder</span>`;
+});
+})
+showIcon.addEventListener('click',function(){
+const allFolders = document.querySelectorAll(".folder");
+allFolders.forEach(folder => {
+  folder.className = "hidden";
   folder.innerHTML = `<span class="text-xl">📁</span><span class="text-xs mt-1 text-center">New Folder</span>`;
 });
 })
