@@ -51,7 +51,10 @@ folderOption.addEventListener("click", (e) => {
   e.stopPropagation();
 folder = document.createElement("div");
   folder.className = "folder w-20 h-20 flex flex-col items-center justify-center text-4xl cursor-pointer";
-  folder.innerHTML = `<span class = "">📁</span><span class="text-xs mt-1 text-center">New Folder</span>`;
+folder.innerHTML = `
+  <span class="folder-icon text-4xl">📁</span>
+  <span class="folder-name text-xs mt-1 text-center">New Folder</span>
+`;
 
   folder.addEventListener("contextmenu", function (e) {
     e.preventDefault();
@@ -80,21 +83,23 @@ deleteFolder.addEventListener('click', () => {
 
 renamebtn.addEventListener('click', () => {
   if (!SelectedFolder) return;
-  const span = SelectedFolder.querySelector('span');
+
+  const nameSpan = SelectedFolder.querySelector('.folder-name');
   const input = document.createElement('input');
   input.type = 'text';
-  input.value = span.innerText;
+  input.value = nameSpan.innerText;
   input.className = 'text-xs mt-1 text-center w-16 border-2 text-black';
-  SelectedFolder.replaceChild(input, span);
+
+  nameSpan.replaceWith(input);
   input.focus();
 
   input.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       const newName = input.value.trim() || "untitled";
       const newSpan = document.createElement("span");
-      newSpan.className = 'text-xs mt-1 text-center';
+      newSpan.className = 'folder-name text-xs mt-1 text-center';
       newSpan.innerText = newName;
-      input.parentElement.replaceChild(newSpan, input);
+      input.replaceWith(newSpan);
       deleteItems.classList.add("hidden");
       SelectedFolder = null;
     }
@@ -250,20 +255,23 @@ desktop.style.backgroundImage = wallpapers[0];
 desktop.style.backgroundSize = "cover";
 desktop.style.backgroundPosition = "center";
 
-largeIcon.addEventListener('click',function(){
-const allFolders = document.querySelectorAll(".folder");
-allFolders.forEach(folder => {
-  folder.className = "folder w-28 h-32 flex flex-col items-center justify-center text-4xl cursor-pointer";
-  folder.innerHTML = `<span class="text-6xl">📁</span><span class="text-xs mt-1 text-center">New Folder</span>`;
+largeIcon.addEventListener('click', function () {
+  document.querySelectorAll(".folder").forEach(folder => {
+    folder.querySelector(".folder-icon").className = "folder-icon text-6xl";
+    folder.querySelector(".folder-name").className = "folder-name text-xs mt-1 text-center";
+    folder.style.width = "7rem";
+    folder.style.height = "8rem";
+  });
 });
-})
-smallIcon.addEventListener('click',function(){
-const allFolders = document.querySelectorAll(".folder");
-allFolders.forEach(folder => {
-  folder.className = "folder w-16 h-16 flex flex-col items-center justify-center text-4xl cursor-pointer";
-  folder.innerHTML = `<span class="text-xl">📁</span><span class="text-xs mt-1 text-center">New Folder</span>`;
+
+smallIcon.addEventListener('click', function () {
+  document.querySelectorAll(".folder").forEach(folder => {
+    folder.querySelector(".folder-icon").className = "folder-icon text-3xl";
+    folder.querySelector(".folder-name").className = "folder-name text-xs mt-1 text-center";
+    folder.style.width = "4rem";
+    folder.style.height = "5rem";
+  });
 });
-})
 showIcon.addEventListener('click',function(){
 const allFolders = document.querySelectorAll(".folder");
 allFolders.forEach(folder => {
